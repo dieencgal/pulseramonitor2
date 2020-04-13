@@ -40,7 +40,7 @@ class ImportContacts extends Command
     public function handle()
     {
         //set the path for the csv files
-        $path = base_path("resources/pendingcontacts/*.csv");
+        $path = base_path('/resources/carpetaPacientes/pendingcontacts/'.Auth::user()->name."/*.csv");
 
         //run 2 loops at a time
         foreach (array_slice(glob($path),0,2) as $file) {

@@ -13,7 +13,7 @@ class ContactsController extends Controller
     {
         $records = [];
 
-        $path = base_path('resources/pendingcontacts/'.Auth::user()->name);
+        $path = base_path('/resources/carpetaPacientes/pendingcontacts/'.Auth::user()->name);
 
 
         foreach (glob($path.'/*.csv') as $file) {
@@ -28,11 +28,12 @@ class ContactsController extends Controller
 
     public function parseImport()
     {
-        if(!File::exists('res/pendingcontacts/'.Auth::user()->name)) {
-            File::makeDirectory('res/pendingcontacts/'.Auth::user()->name, $mode = 0777, true, true);
+        if(!File::exists('/resources/carpetaPacientes/pendingcontacts/'.Auth::user()->name)) {
+            File::makeDirectory(base_path('/resources/carpetaPacientes/pendingcontacts/'.Auth::user()->name), $mode = 0777, true, true);
+
         }
 
-        $path2 = 'res/pendingcontacts/'.Auth::user()->name.'/';
+
         request()->validate([
             'file' => 'required|mimes:csv,txt'
         ]);
@@ -51,11 +52,13 @@ class ContactsController extends Controller
         $parts = (array_chunk($data, 1000));
         $i = 1;
 
+
         foreach($parts as $line) {
-            $filename = base_path('resources/pendingcontacts/'.Auth::user()->name.'/'.date('y-m-d-H-i-s').$i.'.csv');
+            $filename = base_path('/resources/carpetaPacientes/pendingcontacts/'.Auth::user()->name.'/'.date('y-m-d-H-i-s').$i.'.csv');
             file_put_contents($filename, $line);
             $i++;
         }
+
 
         session()->flash('status', 'queued for importing');
 
