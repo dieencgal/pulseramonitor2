@@ -11,24 +11,24 @@
                         @include('flash::message')
                         {!! Form::open(['route' => 'frecuencia_cardiacas.store']) !!}
                         <div class="form-group">
-                        {!! Form::label('tiempo_inicio', 'Fecha y hora inicio frecuencia cardiaca') !!}
+                        {!! Form::label('fecha', 'Fecha y hora') !!}
 
 
-                        <input type="datetime-local" id="tiempo_inicio" name="tiempo_inicio" class="form-control" value="{{Carbon\Carbon::now()->timezone('Europe/Madrid')->format('Y-m-d\Th:i')}}" />
-
-
-                    </div>
-                    <div class="form-group">
-                        {!! Form::label('tiempo_fin', 'Fecha y hora fin frecuencia cardiaca') !!}
-
-
-                        <input type="datetime-local" id="tiempo_fin" name="tiempo_fin" class="form-control" value="{{Carbon\Carbon::now()->timezone('Europe/Madrid')->format('Y-m-d\Th:i')}}" />
+                        <input type="datetime-local" id="fecha" name="fecha" class="form-control" value="{{Carbon\Carbon::now()->timezone('Europe/Madrid')->format('Y-m-d\Th:i')}}" />
 
 
                     </div>
                         <div class="form-group">
-                            {!! Form::label('frec_cardiaca', 'Frecuencia cardiaca') !!}
-                            {!! Form::text('frec_cardiaca',null,['class'=>'form-control', 'required']) !!}
+                            {!! Form::label('frec_cardiaca_media', 'Frecuencia cardiac media') !!}
+                            {!! Form::text('frec_cardiaca_media',null,['class'=>'form-control', 'required']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('frec_cardiaca_max', 'Frecuencia cardiaca máxima') !!}
+                            {!! Form::text('frec_cardiaca_max',null,['class'=>'form-control', 'required']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('frec_cardiaca_min', 'Frecuencia cardiaca mínima') !!}
+                            {!! Form::text('frec_cardiaca_min',null,['class'=>'form-control', 'required']) !!}
                         </div>
 
                         <div class="form-group">

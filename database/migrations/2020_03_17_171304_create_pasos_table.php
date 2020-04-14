@@ -15,9 +15,9 @@ class CreatePasosTable extends Migration
     {
         Schema::create('pasos', function (Blueprint $table) {
             $table->increments('id');
+            $table->dateTime('fecha')->nullable();
             $table->integer('num_pasos');
-            $table->dateTime('tiempo_inicio')->nullable();
-            $table->dateTime('tiempo_fin')->nullable();
+            $table->integer('distancia');
             $table->unsignedInteger('paciente_id')->nullable();
             $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('restrict');
 
@@ -35,5 +35,6 @@ class CreatePasosTable extends Migration
     {
         Schema::dropIfExists('pasos');
     }
+
 }
 

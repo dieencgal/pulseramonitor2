@@ -77,11 +77,7 @@
                                             Registro Sueños
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="{{ url('/periodo_suenos') }}">
-                                            Periodo sueños
-                                        </a>
-                                    </li>
+
 
                                     <li>
                                         <a href="{{ url('/pacientes') }}">
@@ -128,11 +124,7 @@
                                         Registro Sueños
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="{{ url('/periodo_suenos') }}">
-                                        Periodo sueños
-                                    </a>
-                                </li>
+
                                 <li>
                                     <a href="{{ url('/frecuencia_cardiacas') }}">
                                         Frecuencias cardiacas

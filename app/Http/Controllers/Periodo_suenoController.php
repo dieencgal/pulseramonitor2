@@ -64,7 +64,7 @@ class Periodo_suenoController extends Controller
         }
 
         else{
-            $registro_suenos = Registro_sueno::all()->where('paciente_id',(Auth::user()->id)-1)->pluck('tiempo_inicio','id');
+            $registro_suenos = Registro_sueno::all()->where('paciente_id',(Auth::user()->id)-1)->pluck('fecha','id');
             $pacientes = Registro_sueno::all()->where('id',(Auth::user()->id)-1)->pluck('nombre','id');
 
             return view('periodo_suenos/create',['registro_suenos'=>$registro_suenos]);

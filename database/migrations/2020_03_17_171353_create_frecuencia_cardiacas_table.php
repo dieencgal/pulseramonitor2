@@ -15,9 +15,10 @@ class CreateFrecuenciaCardiacasTable extends Migration
     {
         Schema::create('frecuencia_cardiacas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('frec_cardiaca');
-            $table->dateTime('tiempo_inicio');
-            $table->dateTime('tiempo_fin');
+            $table->dateTime('fecha');
+            $table->integer('frec_cardiaca_media')->nullable();
+            $table->integer('frec_cardiaca_max')->nullable();
+            $table->integer('frec_cardiaca_min')->nullable();
             $table->unsignedInteger('paciente_id')->nullable();
             $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('restrict');
 

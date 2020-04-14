@@ -66,8 +66,8 @@ class Registro_suenoController extends Controller
     {
         $this->validate($request, [
 
-            'tiempo_inicio' => 'required|date',
-            'tiempo_fin' => 'required|date',
+            'fecha' => 'required|date',
+            'horas_sueno' => 'required|max:300',
             'paciente_id' => 'required|exists:pacientes,id'
         ]);
         $registro_suenos = new Registro_sueno($request->all());
@@ -119,8 +119,8 @@ class Registro_suenoController extends Controller
     {
         $this->validate($request, [
 
-            'tiempo_inicio' => 'required|date',
-            'tiempo_fin' => 'required|date',
+            'fecha' => 'required|date',
+            'horas_sueno' => 'required|max:300',
             'paciente_id' => 'required|exists:pacientes,id'
         ]);
 

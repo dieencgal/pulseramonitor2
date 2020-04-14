@@ -11,20 +11,17 @@
                         @include('flash::message')
                         {!! Form::open(['route' => 'registro_suenos.store']) !!}
                         <div class="form-group">
-                        {!! Form::label('tiempo_inicio', 'Fecha y hora inicio registro sueño') !!}
+                        {!! Form::label('fecha', 'Fecha y hora') !!}
 
 
-                        <input type="datetime-local" id="tiempo_inicio" name="tiempo_inicio" class="form-control" value="{{Carbon\Carbon::now()->timezone('Europe/Madrid')->format('Y-m-d\Th:i')}}" />
+                        <input type="datetime-local" id="fecha" name="fecha" class="form-control" value="{{Carbon\Carbon::now()->timezone('Europe/Madrid')->format('Y-m-d\Th:i')}}" />
 
 
                     </div>
-                    <div class="form-group">
-                        {!! Form::label('tiempo_fin', 'Fecha y hora fin registro sueño') !!}
-
-
-                        <input type="datetime-local" id="tiempo_fin" name="tiempo_fin" class="form-control" value="{{Carbon\Carbon::now()->timezone('Europe/Madrid')->format('Y-m-d\Th:i')}}" />
-
-                    </div>
+                        <div class="form-group">
+                            {!! Form::label('horas_sueno', 'horas de sueño') !!}
+                            {!! Form::text('horas_sueno',null,['class'=>'form-control', 'required','autofocus']) !!}
+                        </div>
 
                         <div class="form-group">
                             {!!Form::label('paciente_id', 'Paciente') !!}

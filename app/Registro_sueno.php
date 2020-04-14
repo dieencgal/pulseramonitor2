@@ -9,7 +9,7 @@ use App\Paciente;
 class Registro_sueno extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['tiempo_inicio','tiempo_fin','paciente_id'];
+    protected $fillable = ['fecha','horas_sueno','paciente_id'];
     //
     public function paciente()
     {
@@ -25,7 +25,7 @@ class Registro_sueno extends Model
 
 
 
-        return $this->tiempo_inicio . '  //  ' . $this->tiempo_fin . '      Perteneciente al paciente '.$this->paciente_id . '  con  '  . $pac;
+        return $this->fecha. '  //  ' . $this->horas_sueno . '      Perteneciente al paciente '.$this->paciente_id . '  con  '  . $pac;
     }
     }
 

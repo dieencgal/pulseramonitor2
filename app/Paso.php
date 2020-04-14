@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Paso extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['num_pasos', 'tiempo_inicio','tiempo_fin','paciente_id'];
+    protected $fillable = ['fecha', 'num_pasos','distancia','paciente_id'];
     //
 
     public function paciente()

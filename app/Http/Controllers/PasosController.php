@@ -69,9 +69,9 @@ class PasosController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'fecha' => 'required|date',
             'num_pasos' => 'required|max:255',
-            'tiempo_inicio' => 'required|date',
-            'tiempo_fin' => 'required|date',
+            'distancia' => 'required|max:255',
             'paciente_id' => 'required|exists:pacientes,id'
         ]);
         $pasos = new Paso($request->all());
@@ -124,9 +124,9 @@ class PasosController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'fecha' => 'required|date',
             'num_pasos' => 'required|max:255',
-            'tiempo_inicio' => 'required|date',
-            'tiempo_fin' => 'required|date',
+            'distancia' => 'required|max:255',
             'paciente_id' => 'required|exists:pacientes,id'
         ]);
 

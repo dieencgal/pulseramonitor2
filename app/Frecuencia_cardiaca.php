@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Frecuencia_cardiaca extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['frec_cardiaca', 'tiempo_inicio','tiempo_fin','paciente_id'];
+    protected $fillable = ['fecha','frec_cardiaca_media', 'frec_cardiaca_max','frec_cardiaca_min','paciente_id'];
     //
     public function paciente()
     {
@@ -16,6 +16,6 @@ class Frecuencia_cardiaca extends Model
     }
     public function getFullNameAttribute()
     {
-        return $this->frec_cardiaca;
+        return $this->frec_cardiaca_media;
     }
 }

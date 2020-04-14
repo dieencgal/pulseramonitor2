@@ -14,21 +14,20 @@
                             @include('flash::message')
 
                             {!! Form::model($paso, [ 'route' => ['pasos.update',$paso->id], 'method'=>'PUT']) !!}
-
+                            <div class="form-group">
+                                {!! Form::label('fecha', 'Fecha y hora') !!}
+                                <input type="datetime-local" id="fecha" name="fecha" class="form-control"
+                                       value="{{Carbon\Carbon::createFromDate($paso->fecha)->format('Y-m-d\TH:i')}}"/>
+                            </div>
                             <div class="form-group">
                                 {!! Form::label('num_pasos', 'Pasos dados') !!}
-                                {!! Form::text('num_pasos',$paso->paso,['class'=>'form-control', 'required', 'autofocus']) !!}
+                                {!! Form::text('num_pasos',$paso->num_pasos,['class'=>'form-control', 'required', 'autofocus']) !!}
                             </div>
-                            <div class="form-group">
-                                {!! Form::label('tiempo_inicio', 'Fecha y hora inicio de los pasos') !!}
-                                <input type="datetime-local" id="tiempo_inicio" name="tiempo_inicio" class="form-control"
-                                       value="{{Carbon\Carbon::createFromDate($paso->tiempo_inicio)->format('Y-m-d\TH:i')}}"/>
-                            </div>
-                            <div class="form-group">
-                                {!! Form::label('tiempo_fin', 'Fecha y hora fin de los pasos') !!}
 
-                                <input type="datetime-local" id="tiempo_fin" name="tiempo_fin" class="form-control"
-                                       value="{{Carbon\Carbon::createFromDate($paso->tiempo_fin)->format('Y-m-d\TH:i')}}"/>
+
+                            <div class="form-group">
+                                {!! Form::label('distancia', 'distancia') !!}
+                                {!! Form::text('distancia',$paso->distancia,['class'=>'form-control', 'required', 'autofocus']) !!}
                             </div>
                             <div class="form-group">
                                 {!!Form::label('paciente_id', 'Paciente') !!}

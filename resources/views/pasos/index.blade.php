@@ -16,9 +16,10 @@
                         <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
-                                <th>Pasos</th>
-                                <th>Tiempo de inicio</th>
-                                <th>Tiempo de fin</th>
+
+                                <th>Fecha</th>
+                                <th>Número de pasos</th>
+                                <th>Distancia</th>
                                 <th>Paciente</th>
                                 <th colspan="2">Acciones</th>
                             </tr>
@@ -27,9 +28,9 @@
 
 
                                 <tr>
+                                    <td>{{ $paso->fecha }}</td>
                                     <td>{{ $paso->num_pasos }}</td>
-                                    <td>{{ $paso->tiempo_inicio }}</td>
-                                    <td>{{ $paso->tiempo_fin }}</td>
+                                    <td>{{ $paso->distancia }}</td>
                                     <td>{{ $paso->paciente->id}}</td>
 
 

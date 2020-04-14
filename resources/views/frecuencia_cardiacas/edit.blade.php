@@ -13,22 +13,25 @@
                             @include('flash::message')
 
                             {!! Form::model($frecuencia_cardiaca, [ 'route' => ['frecuencia_cardiacas.update',$frecuencia_cardiaca->id], 'method'=>'PUT']) !!}
+                            <div class="form-group">
+                                {!! Form::label('fecha', 'Fecha y hora') !!}
+                                <input type="datetime-local" id="fecha" name="fecha" class="form-control"
+                                       value="{{Carbon\Carbon::createFromDate($frecuencia_cardiaca->fecha)->format('Y-m-d\TH:i')}}"/>
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('frec_cardiaca_media', 'frecuencia cardiaca media') !!}
+                                {!! Form::text('frec_cardiaca_media',$frecuencia_cardiaca->frec_cardiaca_media,['class'=>'form-control', 'required', 'autofocus']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('frec_cardiaca_max', 'frecuencia cardiaca máxima') !!}
+                                {!! Form::text('frec_cardiaca:max',$frecuencia_cardiaca->frec_cardiaca_max,['class'=>'form-control', 'required', 'autofocus']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('frec_cardiaca_min', 'frecuencia cardiaca minima') !!}
+                                {!! Form::text('frec_cardiaca_min',$frecuencia_cardiaca->frec_cardiaca_min,['class'=>'form-control', 'required', 'autofocus']) !!}
+                            </div>
 
-                            <div class="form-group">
-                                {!! Form::label('frec_cardiaca', 'frecuencia cardiaca') !!}
-                                {!! Form::text('frec_cardiaca',$frecuencia_cardiaca->frec_cardiaca,['class'=>'form-control', 'required', 'autofocus']) !!}
-                            </div>
-                            <div class="form-group">
-                                {!! Form::label('tiempo_inicio', 'Fecha y hora inicio de la frecuencia cardiaca') !!}
-                                <input type="datetime-local" id="tiempo_inicio" name="tiempo_inicio" class="form-control"
-                                       value="{{Carbon\Carbon::createFromDate($frecuencia_cardiaca->tiempo_inicio)->format('Y-m-d\TH:i')}}"/>
-                            </div>
-                            <div class="form-group">
-                                {!! Form::label('tiempo_fin', 'Fecha y hora fin de la frecuencia cardiaca') !!}
 
-                                <input type="datetime-local" id="tiempo_fin" name="tiempo_fin" class="form-control"
-                                       value="{{Carbon\Carbon::createFromDate($frecuencia_cardiaca->tiempo_fin)->format('Y-m-d\TH:i')}}"/>
-                            </div>
                             <div class="form-group">
                                 {!!Form::label('paciente_id', 'Paciente') !!}
                                 <br>

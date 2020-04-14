@@ -16,8 +16,8 @@
                         <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
-                                <th>Tiempo de inicio</th>
-                                <th>Tiempo de fin</th>
+                                <th>Fecha</th>
+                                <th>Horas de sueño</th>
                                 <th>Paciente</th>
                                 <th colspan="2">Acciones</th>
                             </tr>
@@ -26,8 +26,8 @@
 
 
                                 <tr>
-                                    <td>{{ $registro_sueno->tiempo_inicio }}</td>
-                                    <td>{{ $registro_sueno->tiempo_fin }}</td>
+                                    <td>{{ $registro_sueno->fecha }}</td>
+                                    <td>{{ $registro_sueno->horas_sueno}}</td>
                                     <td>{{ $registro_sueno->paciente->id }}</td>
                                     <td>
                                         {!! Form::open(['route' => ['registro_suenos.edit',$registro_sueno->id], 'method' => 'get']) !!}

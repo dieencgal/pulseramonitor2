@@ -16,15 +16,13 @@
                             {!! Form::model($registro_sueno, [ 'route' => ['registro_suenos.update',$registro_sueno->id], 'method'=>'PUT']) !!}
 
                             <div class="form-group">
-                                {!! Form::label('tiempo_inicio', 'Fecha y hora inicio del registro sueño') !!}
-                                <input type="datetime-local" id="tiempo_inicio" name="tiempo_inicio" class="form-control"
-                                       value="{{Carbon\Carbon::createFromDate($registro_sueno->tiempo_inicio)->format('Y-m-d\TH:i')}}"/>
+                                {!! Form::label('fecha', 'Fecha y hora ') !!}
+                                <input type="datetime-local" id="fecha" name="fecha" class="form-control"
+                                       value="{{Carbon\Carbon::createFromDate($registro_sueno->fecha)->format('Y-m-d\TH:i')}}"/>
                             </div>
                             <div class="form-group">
-                                {!! Form::label('tiempo_fin', 'Fecha y hora fin del registro sueño') !!}
-
-                                <input type="datetime-local" id="tiempo_fin" name="tiempo_fin" class="form-control"
-                                       value="{{Carbon\Carbon::createFromDate($registro_sueno->tiempo_fin)->format('Y-m-d\TH:i')}}"/>
+                                {!! Form::label('horas_sueno', 'Horas de sueño') !!}
+                                {!! Form::text('horas_sueno',$registro_sueno->horas_sueno,['class'=>'form-control', 'required', 'autofocus']) !!}
                             </div>
                             <div class="form-group">
                                 {!!Form::label('paciente_id', 'Paciente') !!}

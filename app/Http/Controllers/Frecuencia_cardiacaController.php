@@ -66,9 +66,10 @@ class Frecuencia_cardiacaController extends Controller
     public function store(Request $request)
     { //'frec_cardiaca', 'tiempo_inicio','tiempo_fin','paciente_id'
         $this->validate($request, [
-            'frec_cardiaca' => 'required|max:255',
-            'tiempo_inicio' => 'required|date',
-            'tiempo_fin' => 'required|date',
+            'fecha' => 'required|date',
+            'frec_cardiaca_media' => 'required|max:255',
+            'frec_cardiaca_max' => 'required|max:255',
+            'frec_cardiaca_min' => 'required|max:255',
             'paciente_id' => 'required|exists:pacientes,id'
         ]);
         $frecuencia_cardiaca = new Frecuencia_cardiaca($request->all());
@@ -119,9 +120,10 @@ class Frecuencia_cardiacaController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'frec_cardiaca' => 'required|max:255',
-            'tiempo_inicio' => 'required|date',
-            'tiempo_fin' => 'required|date',
+            'fecha' => 'required|date',
+            'frec_cardiaca_media' => 'required|max:255',
+            'frec_cardiaca_max' => 'required|max:255',
+            'frec_cardiaca_min' => 'required|max:255',
             'paciente_id' => 'required|exists:pacientes,id'
         ]);
 
