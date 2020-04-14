@@ -130,6 +130,11 @@
                                         Frecuencias cardiacas
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="{{ url('/welcomebased') }}">
+                                        Base de datos
+                                    </a>
+                                </li>
 
                                 <li>
 

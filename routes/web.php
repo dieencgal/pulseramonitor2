@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\basedatos;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,7 @@ Route::resource('pasos', 'PasosController');
 Route::resource('periodo_suenos', 'Periodo_suenoController');
 Route::resource('registro_suenos', 'Registro_suenoController');
 
+
 Route::get('login2','HomeController@login2');
 Auth::routes();
 
@@ -44,6 +47,10 @@ Route::put('post/{id}', function ($id) {
 
 Route::get('import',  'ContactsController@import');
 Route::post('import', 'ContactsController@parseImport');
+
+
+
+Route::get('welcomebased',  'basedatosController@datos');
 
 
 

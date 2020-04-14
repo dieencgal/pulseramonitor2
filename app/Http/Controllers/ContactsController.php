@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Paciente;
 use File;
 use Auth;
 
 
 
 
+
 class ContactsController extends Controller
 {
+
     public function import()
     {
         $records = [];
@@ -63,6 +66,8 @@ class ContactsController extends Controller
         session()->flash('status', 'queued for importing');
 
 
-        return redirect("import");
+        /*return redirect("import");*/
+        $pacientes = Paciente::all()->where('id', (\Illuminate\Support\Facades\Auth::user()->id) - 1);
+        return view('home',['pacientes'=>$pacientes]);
     }
 }
