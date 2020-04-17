@@ -13,6 +13,10 @@
                         {!! Form::open(['route' => 'pacientes.create', 'method' => 'get']) !!}
                         {!!     Form::submit('Crear datos del paciente', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
+                        <br><br>
+                        {!! Form::open(['route' => 'pacientes.filtro', 'method' => 'get']) !!}
+                        {!!   Form::submit('Paciente', ['class'=> 'btn btn-primary'])!!}
+                        {!! Form::close() !!}
 
                         <br><br>
                         <table class="table table-striped table-bordered">

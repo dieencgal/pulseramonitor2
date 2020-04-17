@@ -18,8 +18,8 @@
                             <tr>
 
                                 <th>Fecha</th>
-                                <th>Número de pasos</th>
                                 <th>Distancia</th>
+                                <th>Número de pasos</th>
                                 <th>Paciente</th>
                                 <th colspan="2">Acciones</th>
                             </tr>
@@ -29,9 +29,9 @@
 
                                 <tr>
                                     <td>{{ $paso->fecha }}</td>
-                                    <td>{{ $paso->num_pasos }}</td>
                                     <td>{{ $paso->distancia }}</td>
-                                    <td>{{ $paso->paciente->id}}</td>
+                                    <td>{{ $paso->num_pasos }}</td>
+                                    <td>{{ $paso->paciente_id}}</td>
 
 
                                     <td>

@@ -10,7 +10,8 @@
         <th>Velocidad media</th>
         <th>Velocidad max</th>
         <th>Velocidad min</th>
-        <th>Peso medio</th>
+        <th>Velocidad min</th>
+        <th>Recuento pasos</th>
         <th>Peso max</th>
         <th>Peso min</th>
         <th>Recuento de minutos activos</th>
@@ -30,6 +31,7 @@
             <td>{{$item->velocidad_media}}</td>
             <td>{{$item->velocidad_max}}</td>
             <td>{{$item->velocidad_min}}</td>
+            <td>{{$item->recuento_pasos}}</td>
             <td>{{$item->peso_medio}}</td>
             <td>{{$item->peso_max}}</td>
             <td>{{$item->peso_min}}</td>
@@ -40,3 +42,4 @@
     @endforeach
     </tbody>
 </table>
+

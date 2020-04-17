@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\basedatos;
 use App\Paso;
 use App\Paciente;
+use App\User;
 use Auth;
+
+
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class PasosController extends Controller
@@ -20,21 +26,49 @@ class PasosController extends Controller
     }
 
     public function index()
+
     {
-
-
         if ((Auth::user()->hasRole('admin'))) {
             $pasos = Paso::all();
 
-            return view('pasos.index', ['pasos' => $pasos]);
+                    return view('pasos.index', ['pasos' => $pasos]);
+                    //abajo del todo estara comentado la otra forma de hacer index admin
         } else {
 
-            $pasos = Paso::all()->where('paciente_id', (Auth::user()->id) - 1);
+            $files = scandir(base_path('/resources/carpetaPacientes/pendingcontacts/' . \Illuminate\Support\Facades\Auth::user()->name . ''), SCANDIR_SORT_DESCENDING);
+            $newest_file = base_path('/resources/carpetaPacientes/pendingcontacts/' . Auth::user()->name . '/' . $files[0]);
+            $pacientes = Paciente::all()->where('id', (Auth::user()->id) - 1)->pluck('id');
 
+            if (($handle = fopen($newest_file, 'r')) !== FALSE) {
+                while (($data = fgetcsv($handle, 2000, ',')) !== FALSE) {
+                    $dateExists = Paso::where('fecha', $data[0])->where('paciente_id', (Auth::user()->id) - 1)->first();
+                    if (!$dateExists) {
+                        $csv_data = new Paso ();
+                        $csv_data->fecha = $data [0];
+                        $csv_data->distancia = $data [2];
+
+                        if ($data [9] == '') {
+
+                            $csv_data->num_pasos = 0;
+                        } else {
+                            $csv_data->num_pasos = $data [9];
+                        }
+                        $csv_data->paciente_id = \Illuminate\Support\Facades\Auth::user()->id - 1;
+                        $csv_data->save();
+
+                    }
+                }
+
+                fclose($handle);
+            }
+
+
+            $pasos = Paso::all()->where('paciente_id', (Auth::user()->id) - 1);
             return view('pasos.index', ['pasos' => $pasos]);
+
+
         }
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -66,8 +100,9 @@ class PasosController extends Controller
      */
 
     //
-    public function store(Request $request)
+ public function store(Request $request)
     {
+
         $this->validate($request, [
             'fecha' => 'required|date',
             'num_pasos' => 'required|max:255',
@@ -84,12 +119,6 @@ class PasosController extends Controller
         return redirect()->route('pasos.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Medico  $medico
-     * @return \Illuminate\Http\Response
-     */
     public function show(Paso $pasos)
     {
         //
@@ -114,19 +143,13 @@ class PasosController extends Controller
 
 
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Medico  $medico
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         $this->validate($request, [
             'fecha' => 'required|date',
-            'num_pasos' => 'required|max:255',
             'distancia' => 'required|max:255',
+            'num_pasos' => 'required|max:255',
             'paciente_id' => 'required|exists:pacientes,id'
         ]);
 
@@ -141,12 +164,7 @@ class PasosController extends Controller
         return redirect()->route('pasos.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Medico  $medico
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         if ((Auth::user()->hasRole('admin'))) {
@@ -162,6 +180,65 @@ class PasosController extends Controller
         }
 
     }
+    public function datos(){
+        $files = scandir(base_path('/resources/carpetaPacientes/pendingcontacts/'. \Illuminate\Support\Facades\Auth::user()->name.''), SCANDIR_SORT_DESCENDING);
+        $newest_file= base_path('/resources/carpetaPacientes/pendingcontacts/'.Auth::user()->name.'/'.$files[0]);
+        if (($handle = fopen($newest_file, 'r')) !== FALSE) {
+            while (($data = fgetcsv($handle, 2000, ',')) !== FALSE) {
+                $csv_data = new basedatos ();
+                $csv_data->fecha = $data [0];
+                $csv_data->distancia = $data [2];
 
+                if($data [9]==''){
+
+                    $csv_data->recuento_pasos = 0;
+                }else {
+                    $csv_data->recuento_pasos= $data [9];
+                }
+                $csv_data ->paciente_id= Auth::user()->id-1;
+                $csv_data->save();
+            }
+                  fclose($handle);
+        }
+        $finalData = $csv_data::all();
+        return view('pasos.indexdos')->withData ( $finalData );
+    }
+
+/*  $files = glob(base_path("resources/carpetaPacientes/pendingcontacts/*"));
+
+            foreach ($files as $fil) {
+                $nombre = basename($fil);
+                $user = User::where('name', $nombre)->first();
+                if ($user !== null) {
+                    $arch = scandir(base_path('/resources/carpetaPacientes/pendingcontacts/' . $nombre . ''), SCANDIR_SORT_DESCENDING);
+
+                    $newest_file = base_path('/resources/carpetaPacientes/pendingcontacts/' . $nombre . '/' . $arch[0]);
+
+
+                    if (($handle = fopen($newest_file, 'r')) !== FALSE) {
+                        while (($data2 = fgetcsv($handle, 2000, ',')) !== FALSE) {
+
+                            $csv_data2 = new Paso ();
+
+                            $csv_data2->fecha = $data2 [0];
+
+                            $csv_data2->distancia = $data2 [2];
+
+                            if ($data2 [9] == '') {
+
+                                $csv_data2->num_pasos = 0;
+                            } else {
+                                $csv_data2->num_pasos = $data2 [9];
+                            }
+                            $csv_data2->paciente_id = ($user->id) - 1;
+
+                            /*if (Paso::all()->where('fecha','=',$data2 [0])->count() == 0 ){
+$csv_data2->save();
+
+
+}
+fclose($handle);
+}
+$pasos = $csv_data2::all();*/
 
 }

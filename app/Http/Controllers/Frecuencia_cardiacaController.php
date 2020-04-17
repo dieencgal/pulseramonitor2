@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\basedatos;
 use App\Frecuencia_cardiaca;
 use App\Paciente;
+use App\User;
 use Auth;
 
 use Illuminate\Http\Request;
@@ -21,25 +23,64 @@ class Frecuencia_cardiacaController extends Controller
     }
     public function index()
     {
-        $userId = Auth::user()->id;
 
-        if ((Auth::user()->hasRole('admin'))){
+        if ((Auth::user()->hasRole('admin'))) {
             $frecuencia_cardiacas = Frecuencia_cardiaca::all();
 
-            return view('frecuencia_cardiacas.index',['frecuencia_cardiacas'=>$frecuencia_cardiacas]);
-        }else{
-            $frecuencia_cardiacas = Frecuencia_cardiaca::all()->where('paciente_id',($userId)-1);
-
             return view('frecuencia_cardiacas.index', ['frecuencia_cardiacas' => $frecuencia_cardiacas]);
+            //abajo del todo estara comentado la otra forma de hacer index admin
+        } else {
+            $files = scandir(base_path('/resources/carpetaPacientes/pendingcontacts/' . \Illuminate\Support\Facades\Auth::user()->name . ''), SCANDIR_SORT_DESCENDING);
+            $newest_file = base_path('/resources/carpetaPacientes/pendingcontacts/' . Auth::user()->name . '/' . $files[0]);
+            $pacientes = Paciente::all()->where('id', (Auth::user()->id) - 1)->pluck('id');
+
+            if (($handle = fopen($newest_file, 'r')) !== FALSE) {
+                while (($data = fgetcsv($handle, 2000, ',')) !== FALSE) {
+                    $dateExists = Frecuencia_cardiaca::where('fecha', $data[0])->where('paciente_id' , (Auth::user()->id)-1)->first();
+                    if (!$dateExists) {
+
+                       /* $frecuencia_cardiacas = (Frecuencia_cardiaca::all()->where('paciente_id', ((Auth::user()->id))-1));
+                        return view ('frecuencia_cardiacas.index',['frecuencia_cardiacas' => $frecuencia_cardiacas]);*/
+
+                        $csv_data = new Frecuencia_cardiaca();
+
+
+                        $csv_data->fecha = $data [0];
+                        if ($data [3] == '') {
+                            $csv_data->frec_cardiaca_media = 0;
+                        } else {
+                            $csv_data->frec_cardiaca_media = $data [3];
+                        }
+                        if ($data [4] == '') {
+                            $csv_data->frec_cardiaca_max = 0;
+                        } else {
+                            $csv_data->frec_cardiaca_max = $data [4];
+                        }
+                        if ($data [5] == '') {
+
+                            $csv_data->frec_cardiaca_min = 0;
+                        } else {
+                            $csv_data->frec_cardiaca_min = $data [5];
+                        }
+
+                        $csv_data->paciente_id = \Illuminate\Support\Facades\Auth::user()->id - 1;
+                        $csv_data->save();
+
+                    }
+
+                }
+                fclose($handle);
+
+            }
+
+            $frecuencia_cardiacas= Frecuencia_cardiaca::all()->where('paciente_id',(Auth::user()->id)-1);
+            return view('frecuencia_cardiacas.index', ['frecuencia_cardiacas' => $frecuencia_cardiacas]);
+
         }
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create(){
 
         if ((Auth::user()->hasRole('admin'))){

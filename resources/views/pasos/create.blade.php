@@ -18,18 +18,18 @@
                         <input type="datetime-local" id="fecha" name="fecha" class="form-control" value="{{Carbon\Carbon::now()->timezone('Europe/Madrid')->format('Y-m-d\Th:i')}}" />
                     </div>
                     <div class="form-group">
-                        {!! Form::label('num_pasos', 'Pasos dados') !!}
-                        {!! Form::text('num_pasos',null,['class'=>'form-control', 'required','autofocus']) !!}
+                        {!! Form::label('distancia', 'Distancia') !!}
+                        {!! Form::text('distancia',null,['class'=>'form-control', 'required','autofocus']) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::label('distancia', 'distancia') !!}
-                        {!! Form::text('distancia',null,['class'=>'form-control', 'required','autofocus']) !!}
+                        {!! Form::label('num_pasos', 'Recuento de pasos') !!}
+                        {!! Form::text('num_pasos',null,['class'=>'form-control', 'required','autofocus']) !!}
                     </div>
 
                         <div class="form-group">
                             {!!Form::label('paciente_id', 'Paciente') !!}
 
-                            {!! Form::text('paciente_id', $pacientes, ['class' => 'form-control','required','autofocus']) !!}
+                            {!! Form::text('paciente_id', null, ['class' => 'form-control','required','autofocus']) !!}
                         </div>
 
 

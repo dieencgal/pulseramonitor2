@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Medico;
 use Illuminate\Http\Request;
+use Auth;
 
 class MedicoController extends Controller
 {

@@ -33,6 +33,7 @@ class CreateBasedatosTable extends Migration
             $table  -> integer('recuento_min_activos')->nullable();
             $table  -> integer('andar_duracion')->nullable();
             $table  -> integer('dormir_duracion')->nullable();
+            $table->string('paciente_id');
 
             $table->timestamps();
         });

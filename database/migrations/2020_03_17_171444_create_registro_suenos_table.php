@@ -16,7 +16,7 @@ public function up()
 Schema::create('registro_suenos', function (Blueprint $table) {
 $table->increments('id');
 $table->dateTime('fecha')->nullable();
-$table->integer('horas_sueno')->nullable();
+$table->integer('horas_sueno')->nullable;
 $table->unsignedInteger('paciente_id')->nullable();
 $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('restrict');
 $table->timestamps();

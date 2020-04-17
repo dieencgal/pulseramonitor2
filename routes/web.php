@@ -51,6 +51,9 @@ Route::post('import', 'ContactsController@parseImport');
 
 
 Route::get('welcomebased',  'basedatosController@datos');
+Route::get('pasos.indexdos',  'PasosController@datos');
+Route::get('paciente/filtro','Registro_suenoController@filtrarpaciente')->name('pacientes.filtro');
+
 
 
 
